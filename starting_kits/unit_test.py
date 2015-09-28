@@ -1,7 +1,7 @@
 import numpy as np
 import sys
 from sklearn.cross_validation import StratifiedShuffleSplit
-from sklearn.metrics import average_precision_score
+from sklearn.metrics import log_loss
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
@@ -22,6 +22,8 @@ if __name__ == "__main__":
     for train_is, test_is in cv:
         clf = module.Classifier()
         clf.fit(X_array[train_is], y_array[train_is])
-        score = average_precision_score(clf, X_array[test_is],
-                                        y_array[test_is])
+        score = log_loss(
+            y_array[test_is],
+            clf.predict(X_array[test_is]),
+        )
         print("Average precision : {0}".format(score))
