@@ -45,20 +45,20 @@ class Classifier(BaseEstimator):
     def __init__(self):
         self.net = build_model(hyper_parameters)
 
-    def scale(self, X):
-        return X / 255.
+    def preprocess(self, X):
+        return (X / 255.).astype(np.float32)
 
     def fit(self, X, y):
-        X = self.scale(X)
+        X = self.preprocess(X)
         X = X.transpose((0, 3, 1, 2))
         self.net.fit(X, y)
         return self
 
     def predict(self, X):
-        X = self.scale(X)
+        X = self.preprocess(X)
         X = X.transpose((0, 3, 1, 2))
         return self.net.predict(X)
 
     def predict_proba(self, X):
-        X = self.scale(X)
+        X = self.preprocess(X)
         return self.net.predict_proba(X)
