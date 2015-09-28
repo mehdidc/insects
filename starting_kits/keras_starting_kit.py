@@ -11,19 +11,17 @@ class Classifier(BaseEstimator):
 
     def __init__(self):
         model = Sequential()
-        model.add(Convolution2D(32, 3, 3, 3, border_mode='full'))
-        model.add(Activation('relu'))
-        model.add(Convolution2D(32, 32, 3, 3))
+        model.add(Convolution2D(64, 3, 3, 3, border_mode='full'))
         model.add(Activation('relu'))
         model.add(MaxPooling2D(poolsize=(2, 2)))
-        model.add(Dropout(0.25))
 
-        model.add(Convolution2D(64, 32, 3, 3, border_mode='full'))
-        model.add(Activation('relu'))
-        model.add(Convolution2D(64, 64, 3, 3))
+        model.add(Convolution2D(128, 3, 3, 3, border_mode='full'))
         model.add(Activation('relu'))
         model.add(MaxPooling2D(poolsize=(2, 2)))
-        model.add(Dropout(0.25))
+
+        model.add(Convolution2D(128, 3, 3, 3, border_mode='full'))
+        model.add(Activation('relu'))
+        model.add(MaxPooling2D(poolsize=(2, 2)))
 
         model.add(Flatten())
         model.add(Dense(64*8*8, 256))

@@ -1,7 +1,7 @@
 import numpy as np
 import sys
 from sklearn.cross_validation import StratifiedShuffleSplit
-from sklearn.metrics import accuracy_score, average_precision_score
+from sklearn.metrics import average_precision_score
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
