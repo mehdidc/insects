@@ -26,4 +26,4 @@ if __name__ == "__main__":
             y_array[test_is],
             clf.predict(X_array[test_is]),
         )
-        print("Average precision : {0}".format(score))
+        print("Log loss : {0}".format(score))
