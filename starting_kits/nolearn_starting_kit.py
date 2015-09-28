@@ -33,7 +33,7 @@ hyper_parameters = dict(
     conv2_num_filters=128, conv2_filter_size=(2, 2), pool2_pool_size=(2, 2),
     conv3_num_filters=128, conv3_filter_size=(2, 2), pool3_pool_size=(2, 2),
     hidden4_num_units=500, hidden5_num_units=500,
-    output_num_units=30, output_nonlinearity=nonlinearities.softmax,
+    output_num_units=18, output_nonlinearity=nonlinearities.softmax,
     update_learning_rate=0.01,
     update_momentum=0.9,
     max_epochs=30,
@@ -46,17 +46,18 @@ class Classifier(BaseEstimator):
         self.net = build_model(hyper_parameters)
 
     def preprocess(self, X):
-        return (X / 255.).astype(np.float32)
+        X = (X / 255.)
+        X = X.astype(np.float32)
+        X = X.transpose((0, 3, 1, 2))
+        return X
 
     def fit(self, X, y):
         X = self.preprocess(X)
-        X = X.transpose((0, 3, 1, 2))
         self.net.fit(X, y)
         return self
 
     def predict(self, X):
         X = self.preprocess(X)
-        X = X.transpose((0, 3, 1, 2))
         return self.net.predict(X)
 
     def predict_proba(self, X):
