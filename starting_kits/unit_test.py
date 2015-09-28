@@ -24,6 +24,6 @@ if __name__ == "__main__":
         clf.fit(X_array[train_is], y_array[train_is])
         score = log_loss(
             y_array[test_is],
-            clf.predict(X_array[test_is]),
+            clf.predict_proba(X_array[test_is]),
         )
         print("Log loss : {0}".format(score))
